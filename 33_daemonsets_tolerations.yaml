@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: mydaemonset
+  labels:
+    app: mydstest
+spec:
+  template:
+    metadata:
+      name: mydaemonset
+      labels:
+        app: mydstest
+    spec:
+      containers:
+        - name: mydaemonsetcontainer
+          image: quay.io/fluentd_elasticsearch/fluentd:latest
+      tolerations:
+        - key: company
+          value: thinknyx
+          effect: NoSchedule
+          operator: Equal
+        - key: node-role.kubernetes.io/control-plane
+          effect: NoSchedule
+  selector:
+    matchLabels:
+      app: mydstest

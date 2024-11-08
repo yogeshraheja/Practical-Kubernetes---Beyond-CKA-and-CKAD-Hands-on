@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: tainttest
+  name: tainttest
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: tainttest
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: tainttest
+    spec:
+      containers:
+      - image: httpd:latest
+        name: httpd
+      tolerations:
+      - key: company
+        value: thinknyx
+        operator: Equal
+        effect: NoSchedule

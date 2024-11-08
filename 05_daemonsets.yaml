@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: mydaemonset
+  labels:
+    app: mydstest
+spec:
+  template:
+    metadata:
+      name: mydaemonset
+      labels:
+        app: mydstest
+    spec:
+      containers:
+        - name: mydaemonsetcontainer
+          image: quay.io/fluentd_elasticsearch/fluentd:latest
+  selector:
+    matchLabels:
+      app: mydstest

@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  creationTimestamp: null
+  name: ingressrule
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: demo.example.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: pageonesvc
+            port:
+              number: 80
+        path: /webpageone
+        pathType: Exact
+      - backend:
+          service:
+            name: pagetwosvc
+            port:
+              number: 80
+        path: /webpagetwo
+        pathType: Exact
+status:
+  loadBalancer: {}

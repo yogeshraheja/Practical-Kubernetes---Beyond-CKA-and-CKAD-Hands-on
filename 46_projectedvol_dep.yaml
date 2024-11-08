@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: projectedvol
+  name: projectedvol
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: projectedvol
+  template:
+    metadata:
+      labels:
+        app: projectedvol
+    spec:
+      containers:
+      - image: ubuntu:latest
+        name: ubuntu
+        command:
+          - "sleep"
+          - "3600"
+        volumeMounts:
+          - name: allinone
+            mountPath: /projectedvolume
+      volumes:
+        - name: allinone
+          projected:
+            sources:
+              - secret:
+                  name: projectedsecret
+                  items:
+                    - key: password
+                      path: authentication/mypassword
+              - configMap:
+                  name: projectedcm
+                  items:
+                    - key: username
+                      path: authentication/myuser

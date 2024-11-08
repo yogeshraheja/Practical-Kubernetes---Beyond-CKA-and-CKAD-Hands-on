@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: registrytestdep
+  name: registrytestdep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: registrytestdep
+  template:
+    metadata:
+      labels:
+        app: registrytestdep
+    spec:
+      containers:
+      - image: yogeshraheja/webimage:v1
+        name: webimage
+      imagePullSecrets: 
+        - name: registrysecret

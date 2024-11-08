@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: myinitdep
+  name: myinitdep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: myinitdep
+  template:
+    metadata:
+      labels:
+        app: myinitdep
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
+      initContainers:
+      - name: inittest
+        image: busybox:latest
+        command: ['sh', '-c', "until nslookup testservice.default.svc.cluster.local; do echo waiting for testservice.default.svc.cluster.local; sleep 10; date; done"]

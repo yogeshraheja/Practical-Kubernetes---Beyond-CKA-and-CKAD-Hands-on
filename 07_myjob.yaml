@@ -1,0 +1,17 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: myjob
+spec:
+  template:
+    metadata:
+    spec:
+      containers:
+      - image: busybox:latest
+        name: myjob
+        command:
+          - 'expr'
+          - '10'
+          - '*'
+          - '10'
+      restartPolicy: Never

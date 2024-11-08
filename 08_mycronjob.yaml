@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mycronjob
+spec:
+  jobTemplate:
+    metadata:
+      name: mycronjob
+    spec:
+      template:
+        metadata:
+        spec:
+          containers:
+          - image: busybox:latest
+            name: mycronjob
+            args:
+              - "sh"
+              - "-c"
+              - "date; uptime; echo Hello From Thinknyx Technologies"
+          restartPolicy: OnFailure
+  schedule: 0/1 * * * *

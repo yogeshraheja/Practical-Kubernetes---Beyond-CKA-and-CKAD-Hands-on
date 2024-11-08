@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nodenametest
+  name: nodenametest
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodenametest
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nodenametest
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
+      nodeName: worker

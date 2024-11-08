@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nodeantiaffinitytest
+  name: nodeantiaffinitytest
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nodeantiaffinitytest
+  template:
+    metadata:
+      labels:
+        app: nodeantiaffinitytest
+    spec:
+      containers:
+      - image: httpd:latest
+        name: httpd
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+              - matchExpressions:
+                - key: environment
+                  operator: NotIn
+                  values: 
+                  - production

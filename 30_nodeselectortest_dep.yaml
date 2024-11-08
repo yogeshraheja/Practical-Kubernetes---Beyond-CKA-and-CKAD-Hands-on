@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nodeselectortest
+  name: nodeselectortest
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nodeselectortest
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nodeselectortest
+    spec:
+      containers:
+      - image: httpd:latest
+        name: httpd
+      nodeSelector:
+        spec: highend

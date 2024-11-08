@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: webappdep
+  name: webappdep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webappdep
+  template:
+    metadata:
+      labels:
+        app: webappdep
+    spec:
+      containers:
+      - image: httpd:latest
+        name: httpd
+        resources:
+          limits:
+            cpu: 500m
+          requests:
+            cpu: 200m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: webappdepsvc
+  name: webappdepsvc
+spec:
+  ports:
+  - name: webappports
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: webappdep
+  type: ClusterIP

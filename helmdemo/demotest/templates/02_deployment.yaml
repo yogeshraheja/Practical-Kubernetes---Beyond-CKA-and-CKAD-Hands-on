@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Chart.Name }}-dep
+  labels:
+    app: {{ .Chart.Name }}
+  namespace: {{ .Chart.Name }}-ns
+spec:
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      name: {{ .Chart.Name }}-deppod
+      labels:
+        app: {{ .Chart.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}-deppodcon
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+  selector:
+    matchLabels:
+      app: {{ .Chart.Name }}

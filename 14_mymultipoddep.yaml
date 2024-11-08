@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mymultipoddep
+  name: mymultipoddep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mymultipoddep
+  template:
+    metadata:
+      labels:
+        app: mymultipoddep
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
+      - image: redis:latest
+        name: redis
+      - image: memcached:latest
+        name: memcached

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: emptydirtest
+  name: emptydirtest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: emptydirtest
+  template:
+    metadata:
+      labels:
+        app: emptydirtest
+    spec:
+      containers:
+      - image: ubuntu:latest
+        name: ubuntu
+        command:
+          - "sleep"
+          - "3600"
+        volumeMounts:
+          - name: datavol
+            mountPath: /datatest
+      volumes:
+        - name: datavol
+          emptyDir: {}

@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app: newdaemonset
+  name: newdaemonset
+spec:
+  selector:
+    matchLabels:
+      app: newdaemonset
+  template:
+    metadata:
+      labels:
+        app: newdaemonset
+    spec:
+      containers:
+      - image: quay.io/fluentd_elasticsearch/fluentd:latest
+        name: fluentd

@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ingresspol
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      app: thinknyxtwo
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+      - podSelector:
+          matchLabels:
+            app: thinknyxone
+    - ports:
+        - port: 80
+          protocol: TCP
+  egress:
+    - to:
+      - namespaceSelector:
+          matchLabels:
+            app: thinknyxns

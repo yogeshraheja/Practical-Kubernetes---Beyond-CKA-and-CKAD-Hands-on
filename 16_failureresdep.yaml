@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: failureresdep
+  name: failureresdep
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: failureresdep
+  template:
+    metadata:
+      labels:
+        app: failureresdep
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx
+        resources:
+          requests:
+            cpu: "20"
+            memory: "1Gi"

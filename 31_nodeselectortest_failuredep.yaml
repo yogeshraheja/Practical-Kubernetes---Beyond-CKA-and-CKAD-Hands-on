@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: nodeselectortestone
+  name: nodeselectortestone
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nodeselectortestone
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nodeselectortestone
+    spec:
+      containers:
+      - image: httpd:latest
+        name: httpd
+      nodeSelector:
+        env: development

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: hostpathtest
+  name: hostpathtest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hostpathtest
+  template:
+    metadata:
+      labels:
+        app: hostpathtest
+    spec:
+      containers:
+      - image: ubuntu:latest
+        name: ubuntu
+        command:
+          - "sleep"
+          - "3600"
+        volumeMounts:
+          - name: datavol
+            mountPath: /datatest
+      volumes:
+        - name: datavol
+          hostPath:
+            path: /data
+            type: DirectoryOrCreate
+      nodeSelector:
+        environment: production

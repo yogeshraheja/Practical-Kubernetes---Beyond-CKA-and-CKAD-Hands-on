@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: smartwaydepsvc
+  name: smartwaydepsvc
+spec:
+  ports:
+  - nodePort: 31000
+    port: 80
+    targetPort: 80
+  selector:
+    app: smartwaydep
+  type: NodePort

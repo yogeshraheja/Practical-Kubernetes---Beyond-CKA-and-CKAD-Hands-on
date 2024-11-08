@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: smartwaydep
+  name: smartwaydep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: smartwaydep
+  template:
+    metadata:
+      labels:
+        app: smartwaydep
+    spec:
+      containers:
+      - image: nginx:latest
+        name: nginx

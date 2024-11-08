@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pvctest
+  name: pvctest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pvctest
+  template:
+    metadata:
+      labels:
+        app: pvctest
+    spec:
+      containers:
+      - image: ubuntu:latest
+        name: ubuntu
+        command:
+          - "sleep"
+          - "3600"
+        volumeMounts:
+          - name: pvcvol
+            mountPath: /pvcdatatest
+      volumes:
+        - name: pvcvol
+          persistentVolumeClaim:
+            claimName: nfsvolpvc
+
